@@ -23,19 +23,19 @@ def delete(request, list_id):
     item = List.objects.get(pk=list_id)
     item.delete()
     messages.success(request,('Item has been deleted'))
-    return redirect('index')
+    return redirect('/index')
 def cross_off(request , list_id):
     item = List.objects.get(pk=list_id)
     item.completed = True
     item.save()
     messages.success(request, ('Item has been Crossed'))
-    return redirect('index')
+    return redirect('/index')
 def uncross(request , list_id):
     item = List.objects.get(pk=list_id)
     item.completed = False
     item.save()
     messages.success(request, ('Item has been Uncrossed'))
-    return redirect('index')
+    return redirect('/index')
 def edit(request, list_id):
     if request.method == 'POST':
         item = List.objects.get(pk=list_id)
@@ -43,7 +43,7 @@ def edit(request, list_id):
         if form.is_valid():
             form.save()
             messages.success(request,('Items has been Edited'))
-            return redirect('index')
+            return redirect('/index')
     else:
         item = List.objects.get(pk=list_id)
         return render(request,'edit.html',{'item': item})
